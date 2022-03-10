@@ -5,12 +5,14 @@ import { makeAutoObservable } from "mobx";
 
 export default class BooksStore {
     constructor(){
-    this._author = []
-    this._genre = []
-    this._books=[]
+    this._books= []
+    this._authors = []
+    this._genres = []
     this._selectedGenre={}
     this._selectedAuthor={}
+   // this._selectedBooks={}
     makeAutoObservable(this)
+    
 }
 
 setAuthors(authors){
@@ -28,6 +30,9 @@ setSelectedGenre(genre){
 setSelectedAuthor(author){
     this._selectedAuthor=author
 }
+setSelectedBooks(books){
+    this._selectedBooks=books
+}
 get authors(){
     return this._authors // вызывается когда переменная isAuth была изменена
 }
@@ -42,5 +47,8 @@ get selectedGenre(){
 }
 get selectedAuthor(){
     return this._selectedAuthor
+}
+get selectedBooks(){
+    return this._selectedBooks
 }
 }

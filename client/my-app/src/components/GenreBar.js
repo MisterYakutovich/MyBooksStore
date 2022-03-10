@@ -1,49 +1,34 @@
 //import { keys } from "mobx";
 import axios from "axios";
-//import { observer } from "mobx-react-lite";
+import { observer } from "mobx-react-lite";
 import React,{useContext, useEffect,useState} from "react";
 import {ListGroup,Dropdown,ButtonGroup} from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { BOOKS_ROUTE } from "../utils/consts";
-//import {Context} from "../idnex"
+import {Context} from "../index"
 
-const GenreBar=()=>{
+const GenreBar=observer(()=>{
   
-//const {book}=useContext(Context)
- // const [genre,setGenre]=useState([]) 
-   // useEffect(()=>{
-     // const apiUrl="http://localhost:5000/api/genre"
-      //   axios.get(apiUrl).then((resp)=>{
-        //   const allPersons=resp.data
-         //  setGenre(allPersons)
-       //  })
-      //  },[setGenre])
-      const [genre,setGenre]=useState([]) 
-      useEffect(()=>{
-          fetch("http://localhost:5000/api/genre")
-             .then(res=>res.json())
-             .then(data=> setGenre(data))
-      },[])
+const {book}=useContext(Context)
+book.books.map(i=>console.log(i.name))
+const colors = Object.values(book);
+console.log(colors)
 
-  const [author,setAuthor]=useState([]) 
-    useEffect(()=>{
-        fetch("http://localhost:5000/api/author")
-           .then(res=>res.json())
-           .then(data=> setAuthor(data))
-    },[])
-  
-    const [books,setBooks]=useState([]) 
-    useEffect(()=>{
-        fetch("http://localhost:5000/api/books")
-           .then(res=>res.json())
-           .then(data=> setBooks(data))
-    },[])
  
-  
+   // const [books,setBooks]=useState([]) 
+  //  useEffect(()=>{
+       // fetch("http://localhost:5000/api/books")
+        //   .then(res=>res.json())
+          // .then(data=> setBooks(data))
+    //},[])
+ 
   const navigate=useNavigate()
-  
+ 
+
+ 
     return(
-       genre.map(el=>
+      
+     book.genres.map(el=>
         <ListGroup className="">
         
               <ListGroup.Item action variant="warning" key={el.id}>
@@ -52,11 +37,15 @@ const GenreBar=()=>{
                      <Dropdown.Toggle split variant="string" id="dropdown-split-basic" />
                      <Dropdown.Menu className="super-colors">
     
-                   {books.map(i=>(      
-                  <Dropdown.Item onClick={()=> navigate(BOOKS_ROUTE + "/" + i.id)}
-                                 key={i.id}>{el.id===i.genreId ? i.name : "" }</Dropdown.Item>
-    
-        ))}
+                     
+                        {book.books.map(i=>(
+
+                        
+                         
+                  <Dropdown.Item onClick={()=> navigate(BOOKS_ROUTE+ "/" + i.id )}
+                                 key={i.id}>{i.name}</Dropdown.Item>
+                        ))}
+                            
                   <Dropdown.Divider />
                      </Dropdown.Menu>                   
                    </Dropdown>                    
@@ -64,7 +53,7 @@ const GenreBar=()=>{
          
         </ListGroup>
                    
-        )     
+       ) 
     )
-}
+})
 export default GenreBar

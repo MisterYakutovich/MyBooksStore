@@ -8,12 +8,12 @@ import {Context} from "../index"
 
 const Shop =observer(()=>{
     const {book}=useContext(Context)
-   // const [genre,setGenre]=useState([]) 
+   
     
     useEffect(()=>{
         fetchGenre().then(data=>book.setGenres(data))
         fetchAuthor().then(data=>book.setAuthors(data))
-        fetchBooks().then(data=>book.setBooks(data.rows))
+        fetchBooks().then(data=>book.setBooks(data))
        // fetch("http://localhost:5000/api/books")
           // .then(res=>res.json())
           // .then(data=> setBooks(data))

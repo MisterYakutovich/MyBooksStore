@@ -1,10 +1,10 @@
 import React,{useContext, useEffect,useState} from "react"
 import BooksItem from "./BooksItem"
 import {Row} from "react-bootstrap"
-import { observer } from "mobx-react-lite"
-import {Context} from "../index"
+//import { observer } from "mobx-react-lite"
+//import {Context} from "../index"
 
-const BooksList = ()=>{
+const BooksList =()=>{
    // const {book}=useContext(Context)
 
     const [books,setBooks]=useState([]) 
