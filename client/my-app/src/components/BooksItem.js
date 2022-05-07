@@ -2,8 +2,8 @@ import React,{useEffect,useState} from "react"
 import {Col,Card,Image} from "react-bootstrap"
 import {useNavigate} from "react-router-dom"
 import { BOOKS_ROUTE } from "../utils/consts"
-//import star from "../assercs/star.png"
 import ratingStar1 from "../assercs/ratingStar1.png"
+
 
 const BooksItem=({book})=>{
     const [author,setAuthor]=useState([]) 
@@ -27,7 +27,7 @@ const BooksItem=({book})=>{
 
                 <div className="mt-1 d-flex justify-content-between align-items-center">
                   {author.map(au=>
-                <div>{book.authorId===au.id ?  au.name : ""}</div>
+                <div key={au.id}>{book.authorId===au.id ?  au.name : ""}</div>
                   )}
                     <div className="d-flex align-items-center"></div>
                     <div className="mx-1" >{book.rating}</div>

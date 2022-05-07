@@ -5,10 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import { Context } from ".";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
+import Basket from "./pages/Basket";
 import { check } from "./http/userApi";
 
 const App =observer(()=> {
   const {user}=useContext(Context)
+  
   const [loading,setLoading]=useState(true)
   useEffect(()=>{
   
@@ -24,7 +26,10 @@ const App =observer(()=> {
   return (
     <BrowserRouter>
       <NavBar />
-      <AppRouter />
+      <AppRouter  />
+      
+      
+      
     </BrowserRouter>
   );
 })

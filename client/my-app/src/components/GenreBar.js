@@ -5,22 +5,29 @@ import React,{useContext, useEffect,useState} from "react";
 import {ListGroup,Dropdown,ButtonGroup} from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
 import { BOOKS_ROUTE } from "../utils/consts";
-import {Context} from "../index"
+//import {Context} from "../index"
 
-const GenreBar=observer(()=>{
+const GenreBar=()=>{
   
-const {book}=useContext(Context)
-book.books.map(i=>console.log(i.name))
-const colors = Object.values(book);
-console.log(colors)
+//const {book}=useContext(Context)
+//book.books.map(i=>console.log(i.name))
+//const colors = Object.values(book);
+//console.log(colors)
 
  
-   // const [books,setBooks]=useState([]) 
-  //  useEffect(()=>{
-       // fetch("http://localhost:5000/api/books")
-        //   .then(res=>res.json())
-          // .then(data=> setBooks(data))
-    //},[])
+    const [books,setBooks]=useState([]) 
+    useEffect(()=>{
+        fetch("http://localhost:5000/api/books")
+           .then(res=>res.json())
+           .then(data=> setBooks(data))
+    },[])
+    const [genre,setGenre]=useState([]) 
+    useEffect(()=>{
+        fetch("http://localhost:5000/api/genre")
+           .then(res=>res.json())
+           .then(data=> setGenre(data))
+    },[])
+ 
  
   const navigate=useNavigate()
  
@@ -28,7 +35,7 @@ console.log(colors)
  
     return(
       
-     book.genres.map(el=>
+     genre.map(el=>
         <ListGroup className="">
         
               <ListGroup.Item action variant="warning" key={el.id}>
@@ -38,10 +45,8 @@ console.log(colors)
                      <Dropdown.Menu className="super-colors">
     
                      
-                        {book.books.map(i=>(
-
-                        
-                         
+                        { books.filter(i=>i.genreId===el.id).map(i=>(
+                  
                   <Dropdown.Item onClick={()=> navigate(BOOKS_ROUTE+ "/" + i.id )}
                                  key={i.id}>{i.name}</Dropdown.Item>
                         ))}
@@ -55,5 +60,5 @@ console.log(colors)
                    
        ) 
     )
-})
+}
 export default GenreBar

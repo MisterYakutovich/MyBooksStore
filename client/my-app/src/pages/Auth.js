@@ -1,13 +1,12 @@
-import { Button,Row } from "react-bootstrap";
 import React, { useContext, useState, } from "react";
-import { Container,Form,Card } from "react-bootstrap";
-import { NavLink,useLocation } from "react-router-dom";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { Container,Form,Card,Button,Row } from "react-bootstrap";
+import { NavLink,useLocation,useNavigate } from "react-router-dom";
+import {SHOP_ROUTE,LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import {login,registration} from "../http/userApi"
 import { observer } from "mobx-react-lite";
 import {Context} from "../index"
-import { useNavigate } from "react-router-dom";
-import { SHOP_ROUTE } from "../utils/consts";
+
+
 
 
 const Auth =observer(()=>{
@@ -33,6 +32,9 @@ const Auth =observer(()=>{
         }     
         user.setUser(user)
         user.setIsAuth(true)
+        if (email==="admin@mail.ru" && password==="root"){
+            user.setIsAdmin(true)
+        }
         
         navigate(SHOP_ROUTE)
         console.log(navigate)

@@ -8,6 +8,7 @@ import {Context} from "../index"
 
 const Shop =observer(()=>{
     const {book}=useContext(Context)
+    
    
     
     useEffect(()=>{
@@ -18,6 +19,7 @@ const Shop =observer(()=>{
           // .then(res=>res.json())
           // .then(data=> setBooks(data))
     },[])
+    
     return (
         
         <Container>

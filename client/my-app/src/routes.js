@@ -14,7 +14,7 @@ export const authRoutes = [ // список страниц для авториз
         Element: Admin  // компонент,сама страница
     },
     {
-        path: BASKET_ROUTE,
+        path: BASKET_ROUTE ,
         Element: Basket
     },
 

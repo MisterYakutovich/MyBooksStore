@@ -1,25 +1,34 @@
-import React from "react";
-import { useEffect,useState } from "react";
+import React,{ useEffect,useState,useContext } from "react";
 import {Col,Container,Image,Row,Card,Button} from "react-bootstrap"
-import { BASKET_ROUTE, BOOKS_ROUTE } from "../utils/consts";
-import { useParams } from "react-router-dom";
-//import star from "../assercs/star.png"
-import { fetchOneBook } from "../http/booksApi";
-import { useNavigate } from "react-router-dom";
+import {  BASKET_ROUTE, LOGIN_ROUTE } from "../utils/consts";
+import { useParams,useNavigate } from "react-router-dom";
+import { addBasket,getBasket, fetchBooks, fetchOneBook } from "../http/booksApi";
 import ratingStar1 from "../assercs/ratingStar1.png"
+import { Context } from "../index";
+
+
+//import { observer } from "mobx-react-lite";
+
 
 
 const BooksPage =()=>{
+    const {basket}=useContext(Context)
+    const {user}=useContext(Context)
     const navigate=useNavigate()
     const [books,setBooks]=useState({info:[]}) 
     const {id}=useParams()
        
     useEffect(()=>{
         fetchOneBook(id).then(data=>setBooks(data))
-       // fetch("http://localhost:5000/api/books")
-          // .then(res=>res.json())
-          // .then(data=> setBooks(data))
+        
     },[])
+    const add = ()=>{
+        const formData=new FormData()
+        formData.append("bookId",id)
+        addBasket(formData).then(response=>alert(`Товар ` + books.name + `добавлен`))
+    }
+    
+
 
     return (
         <Container className="mt-3">
@@ -43,14 +52,24 @@ const BooksPage =()=>{
                          >{books.rating}</div>             
             </Row>   
                 </Col>
-
+                
                 <Col md={4}>
+               
                     <Card className="d-flex  justify-content-center align-items-center"
                          style={{width:250,height:250,fontSize:32,border:"5px solid lightgray"}}>
                          <h3>Цена {books.price} руб.</h3>
-                         <Button variant={"outline-dark"}
-                                 onClick={()=>navigate(BASKET_ROUTE)}>Добавить в корзину</Button>
+                         {user.isAuth ?
+                         <Button variant={"outline-dark"} 
+                                 onClick={add}>Добавить в корзину</Button>
+                
+                              :
+                              <Button variant={"outline-dark"} 
+                                 onClick={()=>navigate(LOGIN_ROUTE)}>Добавить в корзину</Button>
+                         }
+                
                     </Card>
+
+
                 </Col>
             </Row>
             <Row className="d-flex flex-column m-3">

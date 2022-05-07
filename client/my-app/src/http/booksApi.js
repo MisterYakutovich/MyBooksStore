@@ -1,5 +1,5 @@
 import { $authHost,$host } from "./index";
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 
 export const fetchGenre=async()=>{
     const {data} = await $host.get("api/genre")
@@ -28,4 +28,12 @@ export const createBooks=async(books)=>{
 export const fetchOneBook=async(id)=>{
     const {data} = await $host.get("api/books/" + id)
     return data
+}
+export const getBasket = async()=>{
+        const {data} = await $authHost.get("api/basket")
+        return data
+}
+export const addBasket = async (bookId)=>{
+        const {response} = await $authHost.post("api/basket",bookId)
+        return response
 }
