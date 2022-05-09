@@ -31,6 +31,7 @@ const Auth =observer(()=>{
            
         }     
         user.setUser(user)
+        user.setUser(data)
         user.setIsAuth(true)
         if (email==="admin@mail.ru" && password==="root"){
             user.setIsAdmin(true)

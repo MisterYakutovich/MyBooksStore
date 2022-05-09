@@ -8,7 +8,7 @@ export default class BooksStore {
     this._books= []
     this._authors = []
     this._genres = []
-    this.baskets=[]
+    this._baskets=[]
     this._count=0
 
     this._selectedGenre={}
@@ -45,7 +45,7 @@ setSelectedBooks(books){
 get authors(){
     return this._authors // вызывается когда переменная isAuth была изменена
 }
-get basket(){
+get baskets(){
     return this._baskets
 }
 get count(){

@@ -13,7 +13,7 @@ const BooksItem=({book})=>{
            .then(data=> setAuthor(data))
     },[])
     const navigate=useNavigate()
-    console.log(navigate)
+    
 
     return(
         <Col md={3} 
